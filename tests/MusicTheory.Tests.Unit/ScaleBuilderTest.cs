@@ -1,5 +1,6 @@
 using MusicTheory.Common.Features.Accidentals;
 using MusicTheory.Common.Features.Intervals;
+using MusicTheory.Common.Features.Notes;
 using MusicTheory.Common.Features.Scales;
 using System.Linq;
 using Xunit;
