@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTheory.Common", "src\MusicTheory.Common\MusicTheory.Common.csproj", "{19A07B44-5979-4B68-B119-2BE141236131}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{34D0D5AB-AB37-402A-ADE1-CE60ED00B4CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTheory.Tests.Unit", "tests\MusicTheory.Tests.Unit\MusicTheory.Tests.Unit.csproj", "{FE23F682-BC95-46B2-B91B-E8496281CC92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19A07B44-5979-4B68-B119-2BE141236131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19A07B44-5979-4B68-B119-2BE141236131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19A07B44-5979-4B68-B119-2BE141236131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19A07B44-5979-4B68-B119-2BE141236131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE23F682-BC95-46B2-B91B-E8496281CC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE23F682-BC95-46B2-B91B-E8496281CC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE23F682-BC95-46B2-B91B-E8496281CC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE23F682-BC95-46B2-B91B-E8496281CC92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE23F682-BC95-46B2-B91B-E8496281CC92} = {34D0D5AB-AB37-402A-ADE1-CE60ED00B4CA}
+	EndGlobalSection
+EndGlobal
