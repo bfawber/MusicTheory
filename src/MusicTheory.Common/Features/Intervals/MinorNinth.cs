@@ -2,7 +2,7 @@
 
 public class MinorNinth : IInterval
 {
-	public int NumberOfSteps => 9;
+	public int NumberOfSteps => 8;
 
 	public ModificationKind Modification => ModificationKind.Minor;
 }

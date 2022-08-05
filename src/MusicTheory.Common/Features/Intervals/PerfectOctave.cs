@@ -2,7 +2,7 @@
 
 public class PerfectOctave : IInterval
 {
-	public int NumberOfSteps => 8;
+	public int NumberOfSteps => 7;
 
 	public ModificationKind Modification => ModificationKind.None;
 }

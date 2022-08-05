@@ -8,6 +8,7 @@ public class IntervalService : IIntervalService
 {
 	private readonly MajorScaleBuilder _majorScaleBuilder;
 	private readonly IAccidentalsService _accidentalsService;
+
 	public IntervalService(MajorScaleBuilder majorScaleBuilder, IAccidentalsService accidentalsService)
 	{
 		_majorScaleBuilder = majorScaleBuilder;
@@ -48,5 +49,10 @@ public class IntervalService : IIntervalService
 			Name = $"{currentNote.Item.Name.First().ToString()}{accidental}",
 			Accidental = accidental,
 		};
+	}
+
+	public Note GetBelow(Note startingNote, IInterval interval)
+	{
+		throw new NotImplementedException();
 	}
 }

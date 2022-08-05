@@ -38,7 +38,11 @@ public abstract class BaseScaleBuilder
 			{
 				Item = nextNote,
 			};
-			result.Notes.Add(current);
+
+			if(nextNote != startingNote)
+			{
+				result.Notes.Add(current);
+			}
 		}
 
 		return result;
