@@ -4,5 +4,5 @@ public class MajorThirtheenth : IInterval
 {
 	public int NumberOfSteps => 12;
 
-	public ModificationKind Modification => ModificationKind.None;
+	public ModificationKind Modification => ModificationKind.Major;
 }

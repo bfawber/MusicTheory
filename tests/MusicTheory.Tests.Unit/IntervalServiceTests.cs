@@ -60,4 +60,50 @@ public class IntervalServiceTests
 			Accidental = "b",
 		}, new MinorThirteenth());
 	}
+
+	[Fact]
+	public void TestBelow()
+	{
+		var intervalService = new IntervalService(new Common.Features.Scales.MajorScaleBuilder(new StepService(new AccidentalsService())), new AccidentalsService());
+
+		var result = intervalService.GetBelow(new Note
+		{
+			Name = "C",
+		}, new DiminishedSeventh());
+
+		result = intervalService.GetBelow(new Note
+		{
+			Name = "C",
+		}, new MinorNinth());
+
+		result = intervalService.GetBelow(new Note
+		{
+			Name = "C",
+		}, new MinorThird());
+
+		result = intervalService.GetBelow(new Note
+		{
+			Name = "C",
+		}, new MajorSixth());
+
+		result = intervalService.GetBelow(new Note
+		{
+			Name = "C",
+		}, new PerfectOctave());
+
+		result = intervalService.GetBelow(new Note
+		{
+			Name = "C",
+		}, new MajorNinth());
+
+		result = intervalService.GetBelow(new Note
+		{
+			Name = "C",
+		}, new MajorThirtheenth());
+
+		result = intervalService.GetBelow(new Note
+		{
+			Name = "C",
+		}, new MinorThirteenth());
+	}
 }

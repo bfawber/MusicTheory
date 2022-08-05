@@ -5,4 +5,6 @@ namespace MusicTheory.Common.Features.Intervals;
 public interface IIntervalService
 {
     Note Get(Note startingNote, IInterval interval);
+
+	Note GetBelow(Note startingNote, IInterval interval);
 }

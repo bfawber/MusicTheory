@@ -53,6 +53,32 @@ public class IntervalService : IIntervalService
 
 	public Note GetBelow(Note startingNote, IInterval interval)
 	{
-		throw new NotImplementedException();
+		var majorScale = _majorScaleBuilder.Build(startingNote);
+		var currentNote = majorScale.Notes.Start;
+
+		for (int i = 0; i < interval.NumberOfSteps; i++)
+		{
+			currentNote = currentNote.Prev;
+		}
+
+		string accidental = currentNote.Item.Accidental;
+
+		switch (interval.Modification)
+		{
+			case ModificationKind.Diminished:
+				accidental = _accidentalsService.RaiseAccidental(currentNote.Item.Accidental);
+				break;
+
+			case ModificationKind.Major:
+			case ModificationKind.Augmented:
+				accidental = _accidentalsService.LowerAccidental(currentNote.Item.Accidental);
+				break;
+		}
+
+		return new Note
+		{
+			Name = $"{currentNote.Item.Name.First().ToString()}{accidental}",
+			Accidental = accidental,
+		};
 	}
 }

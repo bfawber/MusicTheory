@@ -15,11 +15,13 @@ public class AccidentalsService : IAccidentalsService
 			return match.Groups[2].Value;
 		}
 
-		return string.Empty;
+		return null;
 	}
 
 	public string RaiseAccidental(string accidental)
 	{
+		accidental ??= string.Empty;
+
 		if (accidental.Contains(Constants.Sharp))
 		{
 			return $"{accidental}{Constants.Sharp}";
@@ -27,7 +29,13 @@ public class AccidentalsService : IAccidentalsService
 
 		if (accidental.Contains(Constants.Flat))
 		{
-			return accidental.Substring(0, accidental.Length - 1);
+			var raised = accidental.Substring(0, accidental.Length - 1);
+			if(raised.Length < 1)
+			{
+				return null;
+			}
+
+			return raised;
 		}
 
 		return Constants.Sharp;
@@ -36,6 +44,8 @@ public class AccidentalsService : IAccidentalsService
 
 	public string LowerAccidental(string accidental)
 	{
+		accidental ??= string.Empty;
+
 		if (accidental.Contains(Constants.Flat))
 		{
 			return $"{accidental}{Constants.Flat}";
@@ -43,7 +53,13 @@ public class AccidentalsService : IAccidentalsService
 
 		if (accidental.Contains(Constants.Sharp))
 		{
-			return accidental.Substring(0, accidental.Length - 1);
+			var lowered = accidental.Substring(0, accidental.Length - 1);
+			if (lowered.Length < 1)
+			{
+				return null;
+			}
+
+			return lowered;
 		}
 
 		return Constants.Flat;

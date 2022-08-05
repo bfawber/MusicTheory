@@ -24,7 +24,7 @@ public class Note : IEquatable<Note>
 
 	public static bool operator ==(Note left, Note right)
 	{
-		return EqualityComparer<Note>.Default.Equals(left, right);
+		return Equals(left, right);
 	}
 
 	public static bool operator !=(Note left, Note right)

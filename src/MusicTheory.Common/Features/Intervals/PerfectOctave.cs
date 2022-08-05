@@ -4,5 +4,5 @@ public class PerfectOctave : IInterval
 {
 	public int NumberOfSteps => 7;
 
-	public ModificationKind Modification => ModificationKind.None;
+	public ModificationKind Modification => ModificationKind.Perfect;
 }

@@ -34,8 +34,10 @@ public class Linked<T> : IEnumerable<T>
 			_end.Next = item;
 			item.Prev = _end;
 			_end = item;
-			_end.Next = _start;
 		}
+
+		_start.Prev = _end;
+		_end.Next = _start;
 	}
 
 	public ListItem<T> Get(T itemValue)
