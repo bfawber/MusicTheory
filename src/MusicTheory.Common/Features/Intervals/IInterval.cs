@@ -2,7 +2,11 @@
 
 public interface IInterval
 {
-    int NumberOfSteps { get; }
+	int NumberOfSteps { get; }
 
-    ModificationKind Modification { get; }
+	ModificationKind Modification { get; }
+
+	string Name { get; }
+
+	string ShortName { get; }
 }

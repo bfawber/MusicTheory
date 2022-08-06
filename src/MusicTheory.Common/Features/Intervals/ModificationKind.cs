@@ -4,7 +4,7 @@ public enum ModificationKind
 {
 	Perfect,
 	Major,
-    Minor,
-    Augmented,
-    Diminished
+	Minor,
+	Augmented,
+	Diminished
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace MusicTheory.Common.DataStructures;
+namespace MusicTheory.Common.Core.DataStructures;
 
 public class Linked<T> : IEnumerable<T>
 {
@@ -18,29 +18,34 @@ public class Linked<T> : IEnumerable<T>
 	{
 		foreach (var item in items)
 		{
-			Add(new ListItem<T> { Item = item });
+			Add(item);
 		}
 	}
 
-	public void Add(ListItem<T> item)
+	public void Add(T item)
 	{
+		var listItem = new ListItem<T>
+		{
+			Item = item,
+		};
+
 		if (_start == null)
 		{
-			_start = item;
-			_end = item;
+			_start = listItem;
+			_end = listItem;
 		}
 		else
 		{
-			_end.Next = item;
-			item.Prev = _end;
-			_end = item;
+			_end.Next = listItem;
+			listItem.Prev = _end;
+			_end = listItem;
 		}
 
 		_start.Prev = _end;
 		_end.Next = _start;
 	}
 
-	public ListItem<T> Get(T itemValue)
+	public ListItem<T> GetListItem(T itemValue)
 	{
 		if (_start.Item.Equals(itemValue))
 		{

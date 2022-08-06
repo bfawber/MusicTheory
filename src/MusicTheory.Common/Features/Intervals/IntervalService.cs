@@ -4,6 +4,7 @@ using MusicTheory.Common.Features.Scales;
 
 namespace MusicTheory.Common.Features.Intervals;
 
+/// <inheritdoc />
 public class IntervalService : IIntervalService
 {
 	private readonly MajorScaleBuilder _majorScaleBuilder;
@@ -11,16 +12,17 @@ public class IntervalService : IIntervalService
 
 	public IntervalService(MajorScaleBuilder majorScaleBuilder, IAccidentalsService accidentalsService)
 	{
-		_majorScaleBuilder = majorScaleBuilder;
-		_accidentalsService = accidentalsService;
+		_majorScaleBuilder = majorScaleBuilder ?? throw new ArgumentNullException(nameof(majorScaleBuilder));
+		_accidentalsService = accidentalsService ?? throw new ArgumentNullException(nameof(accidentalsService));
 	}
 
-	public Note Get(Note startingNote, IInterval interval)
+	/// <inheritdoc />
+	public Note GetAbove(Note startingNote, IInterval interval)
 	{
 		var majorScale = _majorScaleBuilder.Build(startingNote);
 		var currentNote = majorScale.Notes.Start;
 
-		for(int i = 0; i < interval.NumberOfSteps; i++)
+		for (int i = 0; i < interval.NumberOfSteps; i++)
 		{
 			currentNote = currentNote.Next;
 		}
@@ -39,7 +41,7 @@ public class IntervalService : IIntervalService
 		}
 
 		// sevenths are special
-		if(interval.NumberOfSteps == 6 && interval.Modification == ModificationKind.Diminished)
+		if (interval.NumberOfSteps == 6 && interval.Modification == ModificationKind.Diminished)
 		{
 			accidental = _accidentalsService.LowerAccidental(accidental);
 		}
@@ -51,6 +53,7 @@ public class IntervalService : IIntervalService
 		};
 	}
 
+	/// <inheritdoc />
 	public Note GetBelow(Note startingNote, IInterval interval)
 	{
 		var majorScale = _majorScaleBuilder.Build(startingNote);

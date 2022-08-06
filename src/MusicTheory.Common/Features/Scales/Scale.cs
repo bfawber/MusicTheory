@@ -1,4 +1,4 @@
-﻿using MusicTheory.Common.DataStructures;
+﻿using MusicTheory.Common.Core.DataStructures;
 using MusicTheory.Common.Features.Notes;
 
 namespace MusicTheory.Common.Features.Scales;

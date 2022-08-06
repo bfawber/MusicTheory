@@ -1,4 +1,4 @@
-﻿using MusicTheory.Common.DataStructures;
+﻿using MusicTheory.Common.Core.DataStructures;
 using MusicTheory.Common.Features.Accidentals;
 using MusicTheory.Common.Features.Notes;
 
@@ -33,7 +33,7 @@ public class StepService : IStepService
 	{
 		string baseNoteValue = from.Name.First().ToString().ToUpper();
 		string accidental = _accidentalsService.GetAccidental(from.Name);
-		var start = BaseSteps.Get(baseNoteValue);
+		var start = BaseSteps.GetListItem(baseNoteValue);
 		string nextBaseNoteValue = start.Next.Item;
 
 		if (_specialSteps.Contains(baseNoteValue))

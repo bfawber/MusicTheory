@@ -1,4 +1,4 @@
-﻿using MusicTheory.Common.DataStructures;
+﻿using MusicTheory.Common.Core.DataStructures;
 using MusicTheory.Common.Features.Intervals;
 using MusicTheory.Common.Features.Notes;
 
@@ -18,10 +18,7 @@ public abstract class BaseScaleBuilder
 	public virtual Scale Build(Note startingNote)
 	{
 		Scale result = new Scale();
-		var current = new ListItem<Note>
-		{
-			Item = startingNote,
-		};
+		var current = startingNote;
 
 		result.Notes.Add(current);
 
@@ -29,17 +26,14 @@ public abstract class BaseScaleBuilder
 		{
 			var nextNote = step switch
 			{
-				ScaleStepKind.Whole => _stepService.WholeStep(current.Item),
-				ScaleStepKind.Half => _stepService.HalfStep(current.Item),
+				ScaleStepKind.Whole => _stepService.WholeStep(current),
+				ScaleStepKind.Half => _stepService.HalfStep(current),
 				_ => throw new InvalidOperationException()
 			};
 
-			current = new ListItem<Note>
-			{
-				Item = nextNote,
-			};
+			current = nextNote;
 
-			if(nextNote != startingNote)
+			if (nextNote != startingNote)
 			{
 				result.Notes.Add(current);
 			}

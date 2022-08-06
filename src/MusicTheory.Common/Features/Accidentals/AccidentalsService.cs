@@ -2,12 +2,16 @@
 
 namespace MusicTheory.Common.Features.Accidentals;
 
+/// <inheritdoc/>
 public class AccidentalsService : IAccidentalsService
 {
 	private static readonly Regex accidentalRegex = new Regex(@"([A-G])([#b]+)", RegexOptions.Compiled);
 
+	/// <inheritdoc/>
 	public string GetAccidental(string note)
 	{
+		if (note == null) return null;
+
 		var match = accidentalRegex.Match(note);
 
 		if (match.Success)
@@ -18,6 +22,7 @@ public class AccidentalsService : IAccidentalsService
 		return null;
 	}
 
+	/// <inheritdoc/>
 	public string RaiseAccidental(string accidental)
 	{
 		accidental ??= string.Empty;
@@ -30,7 +35,7 @@ public class AccidentalsService : IAccidentalsService
 		if (accidental.Contains(Constants.Flat))
 		{
 			var raised = accidental.Substring(0, accidental.Length - 1);
-			if(raised.Length < 1)
+			if (raised.Length < 1)
 			{
 				return null;
 			}
@@ -41,7 +46,7 @@ public class AccidentalsService : IAccidentalsService
 		return Constants.Sharp;
 	}
 
-
+	/// <inheritdoc/>
 	public string LowerAccidental(string accidental)
 	{
 		accidental ??= string.Empty;
