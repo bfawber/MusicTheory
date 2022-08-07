@@ -16,15 +16,18 @@ public class IntervalQuizServiceTests
 	[Fact]
 	public void Ctor_WithInvalidOptions_ThrowsException()
 	{
-		Assert.Throws<ArgumentException>(() => Create(new IntervalQuizServiceOptions(false, false)));
+		var quizService = Create();
+
+		Assert.Throws<ArgumentException>(() => quizService.GetQuestion(null));
+		Assert.Throws<ArgumentException>(() => quizService.GetQuestion(new IntervalQuizQuestionOptions(false, false)));
 	}
 
 	[Fact]
 	public void GetQuestion_WithOnlyAbove_CreatesAboveQuestions()
 	{
-		var quizService = Create(new IntervalQuizServiceOptions(true, false));
+		var quizService = Create();
 
-		var question = quizService.GetQuestion();
+		var question = quizService.GetQuestion(new IntervalQuizQuestionOptions(true, false));
 		Assert.NotNull(question);
 
 		var intervalService = new IntervalService(new MajorScaleBuilder(new StepService(_accidentalsService)), _accidentalsService);
@@ -36,9 +39,9 @@ public class IntervalQuizServiceTests
 	[Fact]
 	public void GetQuestion_WithOnlyBelow_CreatesBelowQuestions()
 	{
-		var quizService = Create(new IntervalQuizServiceOptions(false, true));
+		var quizService = Create();
 
-		var question = quizService.GetQuestion();
+		var question = quizService.GetQuestion(new IntervalQuizQuestionOptions(false, true));
 		Assert.NotNull(question);
 
 		var intervalService = new IntervalService(new MajorScaleBuilder(new StepService(_accidentalsService)), _accidentalsService);
@@ -47,5 +50,5 @@ public class IntervalQuizServiceTests
 		Assert.Equal(answer, question.Answer);
 	}
 
-	private IntervalQuizService Create(IntervalQuizServiceOptions options) => new IntervalQuizService(options, new NoteFactory(_accidentalsService), new IntervalFactory(), new IntervalService(new MajorScaleBuilder(new StepService(_accidentalsService)), _accidentalsService));
+	private IntervalQuizService Create() => new IntervalQuizService(new NoteFactory(_accidentalsService), new IntervalFactory(), new IntervalService(new MajorScaleBuilder(new StepService(_accidentalsService)), _accidentalsService));
 }

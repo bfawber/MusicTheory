@@ -10,30 +10,28 @@ public class IntervalQuizService : IIntervalQuizService
 {
 	private static readonly Random Random = new Random();
 
-	private readonly IntervalQuizServiceOptions _options;
 	private readonly INoteFactory _noteFactory;
 	private readonly IIntervalFactory _intervalFactory;
 	private readonly IIntervalService _intervalService;
 
 
-	public IntervalQuizService(IntervalQuizServiceOptions options, INoteFactory noteFactory, IIntervalFactory intervalFactory, IIntervalService intervalService)
+	public IntervalQuizService(INoteFactory noteFactory, IIntervalFactory intervalFactory, IIntervalService intervalService)
 	{
-		_options = options ?? throw new ArgumentNullException(nameof(options));
 		_noteFactory = noteFactory ?? throw new ArgumentNullException(nameof(noteFactory));
 		_intervalFactory = intervalFactory ?? throw new ArgumentNullException(nameof(intervalFactory));
 		_intervalService = intervalService ?? throw new ArgumentNullException(nameof(intervalService));
-
-		ValidateOptions(_options);
 	}
 
 	/// <inheritdoc />
-	public IntervalQuizQuestion GetQuestion()
+	public IntervalQuizQuestion GetQuestion(IntervalQuizQuestionOptions options)
 	{
+		ValidateOptions(options);
+
 		var startingNote = _noteFactory.CreateRandom();
 		var interval = _intervalFactory.CreateRandom();
-		bool isIntervalAbove = _options.IncludeAbove;
+		bool isIntervalAbove = options.IncludeAbove;
 
-		if (_options.IncludeAbove && _options.IncludeBelow)
+		if (options.IncludeAbove && options.IncludeBelow)
 		{
 			int randomNum = Random.Next(2);
 			if (randomNum < 1)
@@ -55,7 +53,7 @@ public class IntervalQuizService : IIntervalQuizService
 		return new IntervalQuizQuestion(startingNote, interval, answer);
 	}
 
-	private void ValidateOptions(IntervalQuizServiceOptions options)
+	private void ValidateOptions(IntervalQuizQuestionOptions options)
 	{
 		if (options == null || (!options.IncludeAbove && !options.IncludeBelow))
 		{
