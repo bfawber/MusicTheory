@@ -36,7 +36,7 @@ public class LinkedTests
 
 
 		Linked<string> linkedTwo = new Linked<string>();
-		foreach(string input in inputs)
+		foreach (string input in inputs)
 		{
 			linkedTwo.Add(input);
 		}

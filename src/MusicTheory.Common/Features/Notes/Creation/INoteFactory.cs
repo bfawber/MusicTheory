@@ -18,5 +18,5 @@ public interface INoteFactory
 	/// Generates a random note.
 	/// </summary>
 	/// <returns>A new random note.</returns>
-	Note GetRandomNote();
+	Note CreateRandom();
 }

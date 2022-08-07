@@ -37,7 +37,7 @@ public class NoteFactory : INoteFactory
 	}
 
 	/// <inheritdoc />
-	public Note GetRandomNote()
+	public Note CreateRandom()
 	{
 		int noteIndex = _random.Next(BaseNotes.Length);
 		int accidentalIndex = _random.Next(3);

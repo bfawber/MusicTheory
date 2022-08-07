@@ -19,7 +19,7 @@ public class StepService : IStepService
 	/// <inheritdoc />
 	public Note WholeStep(Note from)
 	{
-		if(from == null)
+		if (from == null)
 		{
 			throw new ArgumentNullException(nameof(from));
 		}

@@ -38,7 +38,7 @@ public class NoteFactoryTests
 	{
 		var factory = Create();
 
-		var note = factory.GetRandomNote();
+		var note = factory.CreateRandom();
 
 		Assert.IsType<Note>(note);
 	}

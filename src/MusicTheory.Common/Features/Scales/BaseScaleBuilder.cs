@@ -1,5 +1,4 @@
-﻿using MusicTheory.Common.Core.DataStructures;
-using MusicTheory.Common.Features.Intervals;
+﻿using MusicTheory.Common.Features.Intervals;
 using MusicTheory.Common.Features.Notes;
 
 namespace MusicTheory.Common.Features.Scales;
@@ -17,7 +16,7 @@ public abstract class BaseScaleBuilder
 
 	public virtual Scale Build(Note startingNote)
 	{
-		if(startingNote == null)
+		if (startingNote == null)
 		{
 			throw new ArgumentNullException(nameof(startingNote));
 		}
