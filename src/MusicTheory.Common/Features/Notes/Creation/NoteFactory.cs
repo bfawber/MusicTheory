@@ -1,10 +1,14 @@
-﻿using MusicTheory.Common.Features.Accidentals;
+﻿using MusicTheory.Common.Core.Extensions;
+using MusicTheory.Common.Features.Accidentals;
+using System.Text.RegularExpressions;
 
 namespace MusicTheory.Common.Features.Notes.Creation;
 
 /// <inheritdoc />
 public class NoteFactory : INoteFactory
 {
+
+	private static readonly Regex validNoteRegex = new Regex(@"([A-G])([#b]*)", RegexOptions.Compiled);
 	private static readonly string[] BaseNotes = new[] { "A", "B", "C", "D", "E", "F", "G" };
 
 	private readonly IAccidentalsService _accidentaLService;
@@ -12,12 +16,17 @@ public class NoteFactory : INoteFactory
 
 	public NoteFactory(IAccidentalsService accidentaLService)
 	{
-		_accidentaLService = accidentaLService;
+		_accidentaLService = accidentaLService ?? throw new ArgumentNullException(nameof(accidentaLService));
 	}
 
 	/// <inheritdoc />
 	public Note Create(string name)
 	{
+		if (name.IsNullEmptyOrWhitespace() || !validNoteRegex.IsMatch(name))
+		{
+			throw new ArgumentException(nameof(name));
+		}
+
 		string accidental = _accidentaLService.GetAccidental(name);
 
 		return new Note

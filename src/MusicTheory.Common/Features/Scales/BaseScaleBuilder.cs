@@ -11,12 +11,17 @@ public abstract class BaseScaleBuilder
 
 	protected BaseScaleBuilder(IStepService stepService, params ScaleStepKind[] scaleSteps)
 	{
-		_stepService = stepService;
+		_stepService = stepService ?? throw new ArgumentNullException(nameof(stepService));
 		ScaleSteps = scaleSteps.ToList();
 	}
 
 	public virtual Scale Build(Note startingNote)
 	{
+		if(startingNote == null)
+		{
+			throw new ArgumentNullException(nameof(startingNote));
+		}
+
 		Scale result = new Scale();
 		var current = startingNote;
 
