@@ -2,7 +2,7 @@
 
 public class AugmentedThirteenth : IInterval
 {
-	public int NumberOfSteps => 13;
+	public int NumberOfSteps => 12;
 
 	public ModificationKind Modification => ModificationKind.Augmented;
 

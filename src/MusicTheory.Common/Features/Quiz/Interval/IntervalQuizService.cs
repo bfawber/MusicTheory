@@ -14,7 +14,6 @@ public class IntervalQuizService : IIntervalQuizService
 	private readonly IIntervalFactory _intervalFactory;
 	private readonly IIntervalService _intervalService;
 
-
 	public IntervalQuizService(INoteFactory noteFactory, IIntervalFactory intervalFactory, IIntervalService intervalService)
 	{
 		_noteFactory = noteFactory ?? throw new ArgumentNullException(nameof(noteFactory));
