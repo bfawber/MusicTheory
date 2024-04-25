@@ -17,7 +17,9 @@
       "applicationUrl": "https://localhost:7236;http://localhost:5253",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "useSSL": true,
+      "sslPort": 7236
     },
     "IIS Express": {
       "commandName": "IISExpress",

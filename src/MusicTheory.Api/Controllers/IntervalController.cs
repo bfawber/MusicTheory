@@ -17,8 +17,8 @@ public class IntervalController : ControllerBase
 	}
 
 	[HttpGet(Name = "GetIntervalQuestion")]
-	public IntervalQuizQuestion Get()
+	public IntervalQuizQuestion Get([FromQuery]bool includeAbove=true, [FromQuery] bool includeBelow = false)
 	{
-		return _quizService.GetQuestion(new IntervalQuizQuestionOptions(true, false));
+		return _quizService.GetQuestion(new IntervalQuizQuestionOptions(includeAbove, includeBelow));
 	}
 }

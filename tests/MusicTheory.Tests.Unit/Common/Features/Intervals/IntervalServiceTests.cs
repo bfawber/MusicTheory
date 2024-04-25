@@ -56,6 +56,19 @@ public class IntervalServiceTests
 				Accidental = "b",
 			}
 		},
+		new object[]
+		{
+			new Note
+			{
+				Name = "C",
+			},
+			new AugmentedFifth(),
+			new Note
+			{
+				Name = "G#",
+				Accidental = "#",
+			}
+		},
 	};
 
 	public static IEnumerable<object[]> GetBelowTestData => new List<object[]>
