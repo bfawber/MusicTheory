@@ -1,4 +1,5 @@
-﻿using MusicTheory.Common.Features.Intervals;
+﻿using MusicTheory.Common.Core.Services;
+using MusicTheory.Common.Features.Intervals;
 using MusicTheory.Common.Features.Intervals.Creation;
 using MusicTheory.Common.Features.Notes;
 using MusicTheory.Common.Features.Notes.Creation;
@@ -8,17 +9,17 @@ namespace MusicTheory.Common.Features.Quiz.Interval;
 /// <inheritdoc />
 public class IntervalQuizService : IIntervalQuizService
 {
-	private static readonly Random Random = new Random();
-
 	private readonly INoteFactory _noteFactory;
 	private readonly IIntervalFactory _intervalFactory;
 	private readonly IIntervalService _intervalService;
+	private readonly IRandomService _randomService;
 
-	public IntervalQuizService(INoteFactory noteFactory, IIntervalFactory intervalFactory, IIntervalService intervalService)
+	public IntervalQuizService(INoteFactory noteFactory, IIntervalFactory intervalFactory, IIntervalService intervalService, IRandomService randomService)
 	{
 		_noteFactory = noteFactory ?? throw new ArgumentNullException(nameof(noteFactory));
 		_intervalFactory = intervalFactory ?? throw new ArgumentNullException(nameof(intervalFactory));
 		_intervalService = intervalService ?? throw new ArgumentNullException(nameof(intervalService));
+		_randomService = randomService ?? throw new ArgumentNullException(nameof(randomService));
 	}
 
 	/// <inheritdoc />
@@ -32,7 +33,7 @@ public class IntervalQuizService : IIntervalQuizService
 
 		if (options.IncludeAbove && options.IncludeBelow)
 		{
-			int randomNum = Random.Next(2);
+			int randomNum = _randomService.Next(2);
 			if (randomNum < 1)
 			{
 				isIntervalAbove = false;
@@ -54,9 +55,14 @@ public class IntervalQuizService : IIntervalQuizService
 
 	private void ValidateOptions(IntervalQuizQuestionOptions options)
 	{
-		if (options == null || (!options.IncludeAbove && !options.IncludeBelow))
+		if (options == null)
 		{
-			throw new ArgumentException($"The options values provided are invalid.");
+			throw new ArgumentNullException(nameof(options));
+		}
+
+		if (!options.IncludeAbove && !options.IncludeBelow)
+		{
+			throw new ArgumentException("At least one direction (Above or Below) must be included in quiz options.", nameof(options));
 		}
 	}
 }

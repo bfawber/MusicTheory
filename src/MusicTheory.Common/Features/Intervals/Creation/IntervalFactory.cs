@@ -1,4 +1,5 @@
 ﻿using MusicTheory.Common.Core.Extensions;
+using MusicTheory.Common.Core.Services;
 
 namespace MusicTheory.Common.Features.Intervals.Creation;
 
@@ -6,10 +7,12 @@ namespace MusicTheory.Common.Features.Intervals.Creation;
 public class IntervalFactory : IIntervalFactory
 {
 	private readonly Dictionary<string, IInterval> _intervals = new Dictionary<string, IInterval>();
-	private readonly Random _random = new Random();
+	private readonly IRandomService _randomService;
 
-	public IntervalFactory()
+	public IntervalFactory(IRandomService randomService)
 	{
+		_randomService = randomService ?? throw new ArgumentNullException(nameof(randomService));
+		
 		var type = typeof(IInterval);
 		var types = AppDomain.CurrentDomain.GetAssemblies()
 			.SelectMany(s => s.GetTypes())
@@ -27,12 +30,12 @@ public class IntervalFactory : IIntervalFactory
 	{
 		if (shortName.IsNullEmptyOrWhitespace())
 		{
-			throw new ArgumentException(nameof(shortName));
+			throw new ArgumentException("Interval short name cannot be null, empty, or whitespace.", nameof(shortName));
 		}
 
 		if (!_intervals.TryGetValue(shortName, out IInterval interval))
 		{
-			throw new ArgumentOutOfRangeException($"Invalid interval type '{shortName}'");
+			throw new ArgumentOutOfRangeException(nameof(shortName), $"Invalid interval type '{shortName}'. Valid interval types are: {string.Join(", ", _intervals.Keys)}");
 		}
 
 		return interval;
@@ -41,7 +44,7 @@ public class IntervalFactory : IIntervalFactory
 	/// <inheritdoc/>
 	public IInterval CreateRandom()
 	{
-		int i = _random.Next(0, _intervals.Count - 1);
+		int i = _randomService.Next(0, _intervals.Count - 1);
 		return _intervals.ElementAt(i).Value;
 	}
 }

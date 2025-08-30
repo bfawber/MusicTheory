@@ -1,4 +1,5 @@
-﻿using MusicTheory.Common.Features.Accidentals;
+﻿using MusicTheory.Common.Core.Services;
+using MusicTheory.Common.Features.Accidentals;
 using MusicTheory.Common.Features.Notes;
 using MusicTheory.Common.Features.Notes.Creation;
 using System;
@@ -43,7 +44,7 @@ public class NoteFactoryTests
 		Assert.IsType<Note>(note);
 	}
 
-	private NoteFactory Create() => new NoteFactory(new AccidentalsService());
+	private NoteFactory Create() => new NoteFactory(new AccidentalsService(), new RandomService());
 
 	public static IEnumerable<object[]> NotesTests => new List<object[]>
 	{

@@ -1,4 +1,5 @@
-﻿using MusicTheory.Common.Features.Intervals;
+﻿using MusicTheory.Common.Core.Services;
+using MusicTheory.Common.Features.Intervals;
 using MusicTheory.Common.Features.Intervals.Creation;
 using System;
 using Xunit;
@@ -52,5 +53,5 @@ public class IntervalFactoryTests
 		Assert.IsAssignableFrom<IInterval>(randomInterval);
 	}
 
-	private IntervalFactory Create() => new IntervalFactory();
+	private IntervalFactory Create() => new IntervalFactory(new RandomService());
 }

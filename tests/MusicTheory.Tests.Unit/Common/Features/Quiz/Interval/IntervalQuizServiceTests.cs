@@ -1,4 +1,5 @@
-﻿using MusicTheory.Common.Features.Accidentals;
+﻿using MusicTheory.Common.Core.Services;
+using MusicTheory.Common.Features.Accidentals;
 using MusicTheory.Common.Features.Intervals;
 using MusicTheory.Common.Features.Intervals.Creation;
 using MusicTheory.Common.Features.Notes.Creation;
@@ -12,13 +13,14 @@ namespace MusicTheory.Tests.Unit.Common.Features.Quiz.Interval;
 public class IntervalQuizServiceTests
 {
 	private readonly IAccidentalsService _accidentalsService = new AccidentalsService();
+	private readonly IRandomService _randomService = new RandomService();
 
 	[Fact]
-	public void Ctor_WithInvalidOptions_ThrowsException()
+	public void GetQuestion_WithInvalidOptions_ThrowsException()
 	{
 		var quizService = Create();
 
-		Assert.Throws<ArgumentException>(() => quizService.GetQuestion(null));
+		Assert.Throws<ArgumentNullException>(() => quizService.GetQuestion(null));
 		Assert.Throws<ArgumentException>(() => quizService.GetQuestion(new IntervalQuizQuestionOptions(false, false)));
 	}
 
@@ -50,5 +52,5 @@ public class IntervalQuizServiceTests
 		Assert.Equal(answer, question.Answer);
 	}
 
-	private IntervalQuizService Create() => new IntervalQuizService(new NoteFactory(_accidentalsService), new IntervalFactory(), new IntervalService(new MajorScaleBuilder(new StepService(_accidentalsService)), _accidentalsService));
+	private IntervalQuizService Create() => new IntervalQuizService(new NoteFactory(_accidentalsService, _randomService), new IntervalFactory(_randomService), new IntervalService(new MajorScaleBuilder(new StepService(_accidentalsService)), _accidentalsService), _randomService);
 }

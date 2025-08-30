@@ -1,4 +1,5 @@
 ﻿using MusicTheory.Common.Core.Extensions;
+using MusicTheory.Common.Core.Services;
 using MusicTheory.Common.Features.Accidentals;
 using System.Text.RegularExpressions;
 
@@ -11,12 +12,13 @@ public class NoteFactory : INoteFactory
 	private static readonly Regex validNoteRegex = new Regex(@"([A-G])([#b]*)", RegexOptions.Compiled);
 	private static readonly string[] BaseNotes = new[] { "A", "B", "C", "D", "E", "F", "G" };
 
-	private readonly IAccidentalsService _accidentaLService;
-	private readonly Random _random = new Random();
+	private readonly IAccidentalsService _accidentalsService;
+	private readonly IRandomService _randomService;
 
-	public NoteFactory(IAccidentalsService accidentaLService)
+	public NoteFactory(IAccidentalsService accidentalsService, IRandomService randomService)
 	{
-		_accidentaLService = accidentaLService ?? throw new ArgumentNullException(nameof(accidentaLService));
+		_accidentalsService = accidentalsService ?? throw new ArgumentNullException(nameof(accidentalsService));
+		_randomService = randomService ?? throw new ArgumentNullException(nameof(randomService));
 	}
 
 	/// <inheritdoc />
@@ -24,10 +26,10 @@ public class NoteFactory : INoteFactory
 	{
 		if (name.IsNullEmptyOrWhitespace() || !validNoteRegex.IsMatch(name))
 		{
-			throw new ArgumentException(nameof(name));
+			throw new ArgumentException($"Invalid note name: '{name}'. Note names must follow the pattern [A-G] followed by optional accidentals (#, b).", nameof(name));
 		}
 
-		string accidental = _accidentaLService.GetAccidental(name);
+		string accidental = _accidentalsService.GetAccidental(name);
 
 		return new Note
 		{
@@ -39,8 +41,8 @@ public class NoteFactory : INoteFactory
 	/// <inheritdoc />
 	public Note CreateRandom()
 	{
-		int noteIndex = _random.Next(BaseNotes.Length);
-		int accidentalIndex = _random.Next(3);
+		int noteIndex = _randomService.Next(BaseNotes.Length);
+		int accidentalIndex = _randomService.Next(3);
 
 		string accidental = accidentalIndex switch
 		{

@@ -1,6 +1,6 @@
-﻿namespace MusicTheory.Common.Features.Intervals;
+namespace MusicTheory.Common.Features.Intervals;
 
-public class MajorThirtheenth : IInterval
+public class MajorThirteenth : IInterval
 {
 	public int NumberOfSteps => 12;
 

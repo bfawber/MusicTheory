@@ -1,3 +1,4 @@
+using MusicTheory.Common.Core.Services;
 using MusicTheory.Common.Features.Accidentals;
 using MusicTheory.Common.Features.Intervals;
 using MusicTheory.Common.Features.Intervals.Creation;
@@ -14,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<IRandomService, RandomService>();
 builder.Services.AddSingleton<IStepService, StepService>();
 builder.Services.AddSingleton<MajorScaleBuilder>();
 builder.Services.AddSingleton<IAccidentalsService, AccidentalsService>();
